@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Param, Put } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Put, Delete } from '@nestjs/common';
 import { StudentsService } from './students.service';
 import { Student } from './student.entity';
 import { PropertyMetadata } from '@nestjs/core/injector/instance-wrapper';
@@ -29,5 +29,10 @@ export class StudentsController {
         @Body() data: Partial<Student>,
     ): Promise<Student> {
         return this.studentService.updateStudent(id, data);
+    }
+
+    @Delete(':id')
+    async deleteStudent(@Param('id') id: number): Promise<void>{
+        return this.studentService.deleteStudent(id);
     }
 }
